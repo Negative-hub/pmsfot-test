@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  frontend:
+    image: frontend/pmsfot
+    container_name: pmsfot_frontend
+    build: ./frontend
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    
+  pmsfot_backend:
+    image: backend/pmsfot
+    container_name: pmsfot_backend
+    build: ./backend
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
