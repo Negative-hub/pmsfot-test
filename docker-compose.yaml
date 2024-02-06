@@ -8,9 +8,23 @@ services:
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
     
-  pmsfot_backend:
+  backend:
     image: backend/pmsfot
     container_name: pmsfot_backend
     build: ./backend
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    container_name: pmsfot_postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
